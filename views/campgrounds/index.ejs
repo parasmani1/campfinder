@@ -47,22 +47,24 @@
 <div class="row row-cols-1 row-cols-md-3 g-4">
   <% for(let campground of campgrounds) {%>
     <div class="col mb-4">
-      <div class="card rounded-lg shadow h-100">
-          <img class="card-img-top rounded-top" alt="" src="<%= campground.images.length ? campground.images[0].url : 'https://res.cloudinary.com/igoswamik/image/upload/v1617456429/YelpCamp/rnxtlbcytd7obessayli.png' %>" crossorigin>
-          <div class="card-body d-flex flex-column">
-              <h5 class="card-title text-gradient mb-2" style="font-size: 1.3rem; font-weight: 700;"><%= campground.title %></h5>
-              <p class="card-text mb-2" style="font-size: 0.9rem; line-height: 1.4;"><%= campground.description.substring(0, 100) %>...</p>
-              <p class="mb-1" style="font-size: 0.9rem;">
-                  <i class="bi bi-geo-alt-fill text-primary me-2"></i>
-                  <span class="text-muted"><%= campground.location %></span>
-              </p>
-              <p class="mb-3 text-success" style="font-size: 1.1rem; font-weight: 600;">
-                  $<%= campground.price %>/day
-              </p>
-              <a href="/campgrounds/<%= campground._id %>" class="btn btn-gradient mt-auto" style="font-size: 1rem; font-weight: 600;">View Details</a>
-          </div>
-      </div>
-  </div>
+    <div class="card rounded-lg shadow h-100">
+        <img class="card-img-top rounded-top" alt="" src="<%= campground.images.length ? campground.images[0].url : 'https://res.cloudinary.com/igoswamik/image/upload/v1617456429/YelpCamp/rnxtlbcytd7obessayli.png' %>" crossorigin>
+        <div class="card-body d-flex flex-column">
+            <h5 class="card-title text-gradient mb-2" style="font-size: 1.3rem; font-weight: 700;"><%= campground.title %></h5>
+            <p class="card-text mb-2" style="font-size: 0.9rem; line-height: 1.4;"><%= campground.description.substring(0, 100) %>...</p>
+            <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-geo-alt-fill text-primary me-2" style="font-size: 1.1rem;"></i>
+                <p class="mb-0" style="font-size: 0.9rem;">
+                    <span class="text-muted"><%= campground.location %></span>
+                </p>
+            </div>
+            <p class="mb-3 text-success" style="font-size: 1.1rem; font-weight: 600;">
+                $<%= campground.price %>/day
+            </p>
+            <a href="/campgrounds/<%= campground._id %>" class="btn btn-gradient mt-auto" style="font-size: 1rem; font-weight: 600;">View Details</a>
+        </div>
+    </div>
+</div>
   <% } %>
 </div>
 
