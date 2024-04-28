@@ -4,17 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CampFinder</title>
+    <title>CampSearch</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
         integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <style>
+        body {
+            animation: changeBackground 5s infinite;
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #d4d4d4; /* Font color for winter dark camping style */
+        }
+
+        @keyframes changeBackground {
+            0% {
+                background-image: radial-gradient(circle, #001427, #0e1b2c);
+            }
+
+            25% {
+                background-image: radial-gradient(circle, #102f3e, #001d32);
+            }
+
+            50% {
+                background-image: radial-gradient(circle, #0a242f, #00121d);
+            }
+
+            75% {
+                background-image: radial-gradient(circle, #001d2d, #0c2c3c);
+            }
+
+            100% {
+                background-image: radial-gradient(circle, #002339, #072c39);
+            }
+        }
+
+        .title {
+            animation: slideInDown 1.5s ease-out;
+        }
+
+        .description {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes slideInDown {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
     <link rel="stylesheet" href="/stylesheets/home.css">
 </head>
 
-<body class="d-flex text-center text-white bg-dark">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<body class="d-flex text-center bg-dark">
+    <div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header class="mb-auto">
             <div>
-                <h3 class="float-md-left mb-0">CampFinder</h3>
+                <h3 class="title float-md-left mb-0">CampSearch</h3>
                 <nav class="nav nav-masthead justify-content-center float-md-right">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                     <a class="nav-link" href="/campgrounds">Campgrounds</a>
@@ -28,21 +88,17 @@
             </div>
         </header>
         <main class="px-3">
-            <h1>CampFinder</h1>
-            <p class="lead"> Welcome to CampFinder! <br> Jump right in and explore our many campgrounds. <br>
-                Feel free to share some of your own and comment on others!</p>
-            <a href="/campgrounds" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">View
-                Campgrounds</a>
+            <h1 class="title">Find Your Perfect Camping Spot</h1>
+            <p class="lead description"> Explore thousands of campgrounds around the world. Whether you're looking
+                for a peaceful retreat in nature or an adventurous camping experience, CampSearch has got you covered.
+            </p>
+            <a href="/campgrounds"
+                class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">Start Exploring</a>
         </main>
-
         <footer class="mt-auto text-white-50">
-            <p>&copy; 2023 | Made with &hearts;</p>
+            <p>&copy; 2024 | Made with &hearts; by Parasmani & Saksham</p>
         </footer>
-
-
     </div>
-
-
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>

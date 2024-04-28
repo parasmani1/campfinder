@@ -33,7 +33,7 @@ const CampgroundSchema = new Schema({
     price: Number,
     description: String,
     location: String,
-    averageRating: { type: Number, min: 0, max: 5, default: 0 },
+    averageRating: Number,
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'
@@ -66,21 +66,5 @@ CampgroundSchema.post('findOneAndDelete', async function (doc) {
     }
 })
 
-CampgroundSchema.statics.calculateAverageRating = async function(campgroundId) {
-    const pipeline = [
-      {
-        $match: { campground: campgroundId }
-      },
-      {
-        $group: {
-          _id: null,
-          averageRating: { $avg: '$rating' }
-        }
-      }
-    ];
-  
-    const result = await this.model('Review').aggregate(pipeline);
-    return result.length > 0 ? result[0].averageRating : 0;
-  }
 
 module.exports = mongoose.model('Campground', CampgroundSchema);

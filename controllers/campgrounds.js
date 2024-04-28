@@ -25,8 +25,6 @@ module.exports.createCampground = async (req, res, next) => {
     campground.author = req.user._id;
     await campground.save();
     console.log(campground);
-    campground.averageRating = await Campground.calculateAverageRating(campground._id);
-    await campground.save();
     req.flash('success', 'Successfully made a new campground!');
     res.redirect(`/campgrounds/${campground._id}`)
 }
@@ -38,12 +36,13 @@ module.exports.showCampground = async (req, res,) => {
             path: 'author'
         }
     }).populate('author');
+    console.log(campground);
     if (!campground) {
         req.flash('error', 'Cannot find that campground!');
         return res.redirect('/campgrounds');
     }
-    campground.averageRating = await Campground.calculateAverageRating(campground._id);
     await campground.save();
+    console.log(campground);
     res.render('campgrounds/show', { campground });
 }
 
@@ -70,8 +69,6 @@ module.exports.updateCampground = async (req, res) => {
         }
         await campground.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
     }
-    campground.averageRating = await Campground.calculateAverageRating(campground._id);
-    await campground.save();
     req.flash('success', 'Successfully updated campground!');
     res.redirect(`/campgrounds/${campground._id}`)
 }
@@ -84,7 +81,7 @@ module.exports.deleteCampground = async (req, res) => {
 }
 
 module.exports.index = async (req, res) => {
-    const { search, price, rating, location } = req.query;
+    const { search, price, rating, location, sort = '' } = req.query;
     const queryFilters = {};
 
     // Search filter
@@ -107,6 +104,13 @@ module.exports.index = async (req, res) => {
         queryFilters.location = new RegExp(location, 'i');
     }
 
-    const campgrounds = await Campground.find(queryFilters);
-    res.render('campgrounds/index', { campgrounds, search, price, rating, location });
+    let sortOption = {};
+    if (sort === 'asc') {
+        sortOption = { price: 1 };
+    } else if (sort === 'desc') {
+        sortOption = { price: -1 };
+    }
+
+    const campgrounds = await Campground.find(queryFilters).sort(sortOption);
+    res.render('campgrounds/index', { campgrounds, search, price, rating, location, sort });
 }

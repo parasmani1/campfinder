@@ -1,49 +1,30 @@
 <% layout('layouts/boilerplate')%>
 <div class="row">
-    <h1 class="text-center">New Campground</h1>
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-6">
+        <h1 class="text-gradient mb-4" style="font-size: 3rem; font-weight: 700;">New Campground</h1>
         <form action="/campgrounds" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
                 <input class="form-control" type="text" id="title" name="campground[title]" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
+                <div class="valid-feedback"> Looks good! </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="location">Location</label>
                 <input class="form-control" type="text" id="location" name="campground[location]" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
+                <div class="valid-feedback"> Looks good! </div>
             </div>
-
-            <!-- <div class="mb-3">
-                <label class="form-label" for="image">Image Url</label>
-                <input class="form-control" type="text" id="image" name="campground[image]" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-            </div> -->
             <div class="mb-3">
                 <label class="form-label" for="price">Campground Price</label>
                 <div class="input-group">
                     <span class="input-group-text" id="price-label">$</span>
-                    <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
-                        aria-describedby="price-label" name="campground[price]" required>
+                    <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label" name="campground[price]" required>
                 </div>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
+                <div class="valid-feedback"> Looks good! </div>
             </div>
-
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" type="text" id="description" name="campground[description]"
-                    required></textarea>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
+                <textarea class="form-control" type="text" id="description" name="campground[description]" required></textarea>
+                <div class="valid-feedback"> Looks good! </div>
             </div>
             <div class="mb-3">
                 <div class="form-file custom-file">
@@ -60,4 +41,72 @@
         </form>
         <a href="/campgrounds">All Campgrounds</a>
     </div>
+    <div class="col-md-6">
+        <h2 class="text-gradient mb-3" style="font-size: 2rem; font-weight: 600;">Preview</h2>
+        <div class="card rounded-lg shadow mb-4">
+            <img class="card-img-top rounded-top" id="preview-image" src="https://res.cloudinary.com/dcl2if5xc/image/upload/v1714308334/YelpCamp/c9dgn5kgfzb59glzgbxe.png" alt="Campground Preview" crossorigin>
+            <div class="card-body">
+                <h5 class="card-title text-gradient mb-3" id="preview-title" style="font-size: 1.5rem; font-weight: 600;">Title</h5>
+                <p class="card-text mb-2" id="preview-description" style="font-size: 1rem;">Description</p>
+                <p class="card-text mb-3" style="font-size: 1rem;">
+                    <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+                    <small class="text-muted" id="preview-location">Location</small>
+                </p>
+                <p class="card-text mb-3" style="font-size: 1rem;">
+                    <i class="bi bi-cash-stack text-success me-2"></i>
+                    <small class="text-muted" id="preview-price">Price</small>
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    .text-gradient {
+        background: linear-gradient(to right, #001427, #0e1b2c, #102f3e, #001d32, #0a242f, #00121d, #001d2d, #0c2c3c, #002339, #072c39);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>
+
+<script>
+    const titleInput = document.getElementById('title');
+    const locationInput = document.getElementById('location');
+    const descriptionInput = document.getElementById('description');
+    const priceInput = document.getElementById('price');
+    const imageInput = document.getElementById('image');
+    const previewTitle = document.getElementById('preview-title');
+    const previewLocation = document.getElementById('preview-location');
+    const previewDescription = document.getElementById('preview-description');
+    const previewPrice = document.getElementById('preview-price');
+    const previewImage = document.getElementById('preview-image');
+
+    titleInput.addEventListener('input', () => {
+        previewTitle.textContent = titleInput.value || 'Title';
+    });
+
+    locationInput.addEventListener('input', () => {
+        previewLocation.textContent = locationInput.value || 'Location';
+    });
+
+    descriptionInput.addEventListener('input', () => {
+        previewDescription.textContent = descriptionInput.value || 'Description';
+    });
+
+    priceInput.addEventListener('input', () => {
+        previewPrice.textContent = priceInput.value ? `$${priceInput.value}` : 'Price';
+    });
+
+    imageInput.addEventListener('change', () => {
+        const file = imageInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                previewImage.src = reader.result;
+            }
+            reader.readAsDataURL(file);
+        } else {
+            previewImage.src = "https://res.cloudinary.com/dcl2if5xc/image/upload/v1714308334/YelpCamp/c9dgn5kgfzb59glzgbxe.png";
+        }
+    });
+</script>

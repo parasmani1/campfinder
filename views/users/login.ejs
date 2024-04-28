@@ -1,33 +1,41 @@
 <% layout('layouts/boilerplate')%>
-
-<div class="container d-flex justify-content-center align-items-center mt-5">
-    <div class="row">
-        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
-            <div class="card shadow">
-                <img src="https://images.unsplash.com/photo-1571863533956-01c88e79957e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80"
-                    alt="" class="card-img-top" />
-                <div class="card-body">
-                    <h5 class="card-title">Login</h5>
+<div class="container-fluid">
+    <div class="row min-vh-100">
+        <div class="col-md-6 d-none d-md-flex align-items-center">
+            <img src="https://res.cloudinary.com/dcl2if5xc/image/upload/v1714305760/YelpCamp/nc8yjpkovhb43rawkjxb.jpg" alt="Register Image" class="img-fluid" crossorigin>
+        </div>
+        <div class="col-md-6 bg-light d-flex align-items-center justify-content-center">
+            <div class="card shadow-lg border-0 rounded-lg"  style="width: 30rem;">
+                <div class="card-body p-5">
+                    <h2 class="card-title text-gradient text-center mb-4">Login</h2>
                     <form action="/login" method="POST" class="validated-form" novalidate>
                         <div class="mb-3">
-                            <label class="form-label" for="username">Username</label>
+                            <label class="form-label text-gradient" for="username">Username</label>
                             <input class="form-control" type="text" id="username" name="username" autofocus required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
+                            <div class="valid-feedback"> Looks good! </div>
                         </div>
-
-                        <div class="mb-3">
-                            <label class="form-label" for="password">Password</label>
+                        <div class="mb-4">
+                            <label class="form-label text-gradient" for="password">Password</label>
                             <input class="form-control" type="password" id="password" name="password" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
+                            <div class="valid-feedback"> Looks good! </div>
                         </div>
-                        <button class="btn btn-success btn-block">Login</button>
+                        <button class="btn btn-gradient btn-block">Login</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .text-gradient {
+        background: linear-gradient(to right, #001427, #0e1b2c, #102f3e, #001d32, #0a242f, #00121d, #001d2d, #0c2c3c, #002339, #072c39);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .btn-gradient {
+        background: linear-gradient(to right, #001427, #0e1b2c, #102f3e, #001d32, #0a242f, #00121d, #001d2d, #0c2c3c, #002339, #072c39);
+        color: white;
+    }
+</style>
